@@ -1,13 +1,14 @@
 package mybatis.controllers;
 
 // task controller should focus on accepting incoming connections
+// add exception handling
 
+
+import mybatis.models.ResponseObject;
 import mybatis.models.Task;
 import mybatis.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -25,15 +26,30 @@ public class TaskController {
 
 
     @GetMapping
-    public ArrayList<Task> getAllTasks(){
+    public ArrayList<Task> getAllTasks() {
         return taskService.getAllTasks();
     }
     // will return all tasks
     // could add additional mapping like "/all " but not necessary
 
 
-    public int deleteById(int id){
-        return id;
+    // when deleting will return
+    @DeleteMapping("/{id}")
+    public ResponseObject deleteById(@PathVariable("id") int id) {
+        int status = taskService.deleteById(id);
+        ResponseObject<String> retVal = new ResponseObject<>();
+
+        if (status == 1) {
+            retVal.setMessage("task successfully deleted ");
+            retVal.setResponse_code(200);
+        } else if (status == 0) {
+
+            retVal.setMessage("no task to delete");
+            retVal.setResponse_code(200);
+        }else{
+            retVal.setMessage("more than one task deleted");
+            retVal.setResponse_code(200);
+        } return retVal;
     }
 
 }

@@ -5,6 +5,8 @@ package mybatis.mappers;
 // focus of this class should be on making queries to database
 
 import mybatis.models.Task;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 // imported when you use @Mapper annotation
@@ -21,6 +23,7 @@ public interface TaskMapper {
     String SELECT_ALL_TASKS = "SELECT * FROM `mybatis-test`.tasks";
     String CREATE_TASK = "INSERT INTO `mybatis-test`.tasks (task_name, " +
             "isComplete, user_id) VALUES (#{task_name}, #{isComplete}, #{user_id})";
+    String DELETE_TASK_BY_ID = "DELETE FROM `mybatis-test`.`tasks` WHERE (`id` = '#{id}')";
 
     // @Select annotation requires query to run
     // can grab from above
@@ -38,7 +41,12 @@ public interface TaskMapper {
     public ArrayList<Task> getAllTasks();
 
     @Insert(CREATE_TASK)
-    public Task createUser();
+    public int createTask(Task task);
+
+    @Delete(DELETE_TASK_BY_ID)
+    public int deleteById(int id);
+    // returns an int because update, delete and insert returns
+    // number of rows affected
 
 
 

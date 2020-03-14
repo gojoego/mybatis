@@ -2,11 +2,15 @@ package mybatis.services;
 
 // after creating mapper, create service
 // class that does all the logic
+// "real meat"
 
 import mybatis.mappers.TaskMapper;
+import mybatis.models.ResponseObject;
 import mybatis.models.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 @Service
@@ -33,5 +37,8 @@ public class TaskService {
         return taskMapper.getAllTasks();
     }
 
+    public int deleteById(int id){
+        return taskMapper.deleteById(id);
+    }
 
 }
