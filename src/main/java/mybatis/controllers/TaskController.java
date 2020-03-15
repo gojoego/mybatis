@@ -4,6 +4,7 @@ package mybatis.controllers;
 // add exception handling
 
 
+import mybatis.exceptions.NewUserException;
 import mybatis.models.ResponseObject;
 import mybatis.models.Task;
 import mybatis.services.TaskService;
@@ -33,9 +34,18 @@ public class TaskController {
         retVal.setMessage("here's the tasks");
         return retVal;
     }
+
+    @GetMapping("/{id}")
+    public ResponseObject<Task> getTaskById(@PathVariable("id") int id) {
+        ResponseObject<Task> retVal = new ResponseObject<>();
+        retVal.setData(taskService.getTaskById(id));
+        retVal.setResponse_code(200);
+        retVal.setMessage("here's the tasks");
+        return retVal;
+    }
+
     // will return all tasks
     // could add additional mapping like "/all " but not necessary
-
 
     // when deleting will return
     @DeleteMapping("/{id}")
@@ -44,7 +54,7 @@ public class TaskController {
         ResponseObject<String> retVal = new ResponseObject<>();
 
         if (status == 1) {
-            retVal.setMessage("task successfully deleted ");
+            retVal.setMessage("task successfully deleted");
             retVal.setResponse_code(200);
         } else if (status == 0) {
 
@@ -54,6 +64,10 @@ public class TaskController {
             retVal.setMessage("more than one task deleted");
             retVal.setResponse_code(200);
         } return retVal;
+    }
+    @PatchMapping
+    public int updateTaskById(@RequestBody int id) throws NewUserException {
+        return taskService.updateById(id);
     }
 
 }

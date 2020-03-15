@@ -1,8 +1,12 @@
 package mybatis.models;
 
+// create Response object so that all API responses will have the same structure
+
+
 public class ResponseObject<T> {
 
     T data;
+    // make generic so you can put anything in there later
     String message;
     int response_code;
 

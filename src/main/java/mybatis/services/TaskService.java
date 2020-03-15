@@ -1,17 +1,11 @@
 package mybatis.services;
 
-// after creating mapper, create service
-// class that does all the logic
-// "real meat"
+// after creating a mapper, we create this service class that contains all the logic ("real meat")
 
 import mybatis.mappers.TaskMapper;
-import mybatis.models.ResponseObject;
 import mybatis.models.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import java.util.ArrayList;
 @Service
 // tells spring that this class can be managed by spring as spring bean
@@ -41,4 +35,9 @@ public class TaskService {
         return taskMapper.deleteById(id);
     }
 
+    public Task getTaskById(int id) {
+        return taskMapper.getTaskByI(id);
+    }
+
+    public int updateById(int id){return taskMapper.updateTaskById(id);}
 }

@@ -5,12 +5,8 @@ package mybatis.mappers;
 // focus of this class should be on making queries to database
 
 import mybatis.models.Task;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.*;
 // imported when you use @Mapper annotation
-import org.apache.ibatis.annotations.Select;
 
 import java.util.ArrayList;
 
@@ -23,7 +19,10 @@ public interface TaskMapper {
     String SELECT_ALL_TASKS = "SELECT * FROM `mybatis-test`.tasks";
     String CREATE_TASK = "INSERT INTO `mybatis-test`.tasks (task_name, " +
             "isComplete, user_id) VALUES (#{task_name}, #{isComplete}, #{user_id})";
-    String DELETE_TASK_BY_ID = "DELETE FROM `mybatis-test`.`tasks` WHERE (`id` = '#{id}')";
+    String DELETE_TASK_BY_ID = "DELETE FROM `mybatis-test`.tasks WHERE (id = #{id})";
+    String SELECT_BY_ID = "SELECT * FROM `mybatis-test`.tasks WHERE id = #{id}";
+    String UPDATE_TASK_BY_ID = "UPDATE `mybatis-test`.`tasks` SET `task_name` = #{task_name}, " +
+            "`isComplete` = #{isComplete} WHERE (`id` = #{id})";
 
     // @Select annotation requires query to run
     // can grab from above
@@ -45,8 +44,14 @@ public interface TaskMapper {
 
     @Delete(DELETE_TASK_BY_ID)
     public int deleteById(int id);
+
+    @Select(SELECT_BY_ID)
+    public Task getTaskByI(int id);
     // returns an int because update, delete and insert returns
     // number of rows affected
+
+    @Update(UPDATE_TASK_BY_ID)
+    public int updateTaskById(int id);
 
 
 
