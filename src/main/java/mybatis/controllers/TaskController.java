@@ -26,8 +26,12 @@ public class TaskController {
 
 
     @GetMapping
-    public ArrayList<Task> getAllTasks() {
-        return taskService.getAllTasks();
+    public ResponseObject<ArrayList<Task>> getAllTasks() {
+        ResponseObject<ArrayList<Task>> retVal = new ResponseObject<>();
+        retVal.setData(taskService.getAllTasks());
+        retVal.setResponse_code(200);
+        retVal.setMessage("here's the tasks");
+        return retVal;
     }
     // will return all tasks
     // could add additional mapping like "/all " but not necessary
