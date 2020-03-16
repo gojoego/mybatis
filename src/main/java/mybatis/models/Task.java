@@ -3,11 +3,12 @@ package mybatis.models;
 // POJO
 // instance variables must match database fields
 
+
 public class Task {
 
     int id;
     String task_name;
-    boolean isComplete;
+    boolean is_complete;
     int user_id;
 
     // good practice to create one fully qualified constructor
@@ -18,10 +19,10 @@ public class Task {
     public Task() {
     }
 
-    public Task(int id, String task_name, boolean isComplete, int user_id) {
+    public Task(int id, String task_name, boolean is_complete, int user_id) {
         this.id = id;
         this.task_name = task_name;
-        this.isComplete = isComplete;
+        this.is_complete = is_complete;
         this.user_id = user_id;
     }
 
@@ -41,12 +42,12 @@ public class Task {
         this.task_name = task_name;
     }
 
-    public boolean isComplete() {
-        return isComplete;
+    public boolean isIs_complete() {
+        return is_complete;
     }
 
-    public void setComplete(boolean complete) {
-        isComplete = complete;
+    public void setIs_complete(boolean is_complete) {
+        this.is_complete = is_complete;
     }
 
     public int getUser_id() {
@@ -55,15 +56,5 @@ public class Task {
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
-    }
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", task_name='" + task_name + '\'' +
-                ", isComplete=" + isComplete +
-                ", user_id=" + user_id +
-                '}';
     }
 }

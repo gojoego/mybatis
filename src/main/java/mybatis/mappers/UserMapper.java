@@ -1,5 +1,6 @@
 package mybatis.mappers;
 
+import mybatis.models.Task;
 import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public interface UserMapper {
 
     String SELECT_BY_ID = "SELECT * from `mybatis-test`.users where id =#{id}";
 
+    String SELECT_TASKS_BY_ID = "SELECT * from 'mybatis.test'.tasks where user_id = #{user_id}";
+
 
     // bring queries to annotations and mybatis does the rest of the work
     // will also put them into array list as well
@@ -50,6 +53,8 @@ public interface UserMapper {
     @Select(SELECT_BY_ID)
     User findById(int id);
 
+    @Select(SELECT_TASKS_BY_ID)
+    Task selectTasksById(int user_id);
 
 
 

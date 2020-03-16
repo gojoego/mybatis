@@ -66,8 +66,35 @@ public class TaskController {
         } return retVal;
     }
     @PatchMapping
-    public int updateTaskById(@RequestBody int id) throws NewUserException {
-        return taskService.updateById(id);
+    public int updateTaskById(@RequestBody Task task) throws NewUserException {
+        return taskService.updateById(task);
+    }
+    @PostMapping
+    public ResponseObject<Task> createTask(@RequestBody Task task) throws NewUserException {
+        ResponseObject<Task> retVal = new ResponseObject<>();
+        retVal.setData(taskService.createTask(task));
+        return retVal;
     }
 
+    @GetMapping("/users/{user_id}")
+    public ResponseObject<ArrayList<Task>> findTasksByUserId(@PathVariable("user_id") int id) {
+        ResponseObject<ArrayList<Task>> retVal = new ResponseObject<>();
+        retVal.setData(taskService. findTasksByUserId(id));
+        retVal.setResponse_code(200);
+        retVal.setMessage("here's the tasks associated with this ID");
+        return retVal;
+    }
+
+    /*
+    @GetMapping("/users/{user_id}/tasks/complete")
+    public ResponseObject<ArrayList<Task>>
+    findIncompleteTasksByUserId(@PathVariable("user_id") int user_id,
+                                @RequestParam("complete") boolean complete) {
+        ResponseObject<ArrayList<Task>> retVal = new ResponseObject<>();
+        retVal.setData(taskService.getAllIncompleteTasksByUserID(user_id));
+        retVal.setResponse_code(200);
+        retVal.setMessage("here's the tasks associated with this ID");
+        return retVal;
+    }
+*/
 }

@@ -3,6 +3,8 @@ package mybatis.models;
 // create Response object so that all API responses will have the same structure
 
 
+import java.util.ArrayList;
+
 public class ResponseObject<T> {
 
     T data;

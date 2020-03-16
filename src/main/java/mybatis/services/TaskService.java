@@ -36,8 +36,30 @@ public class TaskService {
     }
 
     public Task getTaskById(int id) {
-        return taskMapper.getTaskByI(id);
+        return taskMapper.getTaskByID(id);
     }
 
-    public int updateById(int id){return taskMapper.updateTaskById(id);}
+    public int updateById(Task task) {
+        int i = taskMapper.updateTaskById(task);
+        return i;
+    }
+
+    public Task createTask(Task task){
+        int i = taskMapper.createTask(task);
+        return task;
+    }
+
+    public ArrayList<Task> findTasksByUserId(int user_id){
+        return taskMapper.findTasksByUserId(user_id);
+    }
+
+    public ArrayList<Task> getAllIncompleteTasksByUserID(int user_id){
+        boolean complete = taskMapper.equals(false);
+        if (complete = false){
+            return taskMapper.getAllIncompleteTasksByUserID(user_id);
+        } else {
+            return null;
+        }
+    }
+
 }

@@ -1,7 +1,9 @@
 package mybatis.services;
 
 import mybatis.exceptions.NewUserException;
+import mybatis.mappers.TaskMapper;
 import mybatis.mappers.UserMapper;
+import mybatis.models.Task;
 import mybatis.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ public class UserService {
     UserMapper userMapper;
     //field injection using an object, can also use constructor or
     // object created using spring via mybatis
+
+    @Autowired
+    TaskMapper taskMapper;
 
     //  @Autowired
     //  User user;
@@ -52,6 +57,7 @@ public class UserService {
         // comes from the UserMapper
 
         if (i == 1) {
+            userMapper.makeUserInactive(id);
             return userMapper.findById(id);
             // comes from userMapper
         } else {
@@ -72,20 +78,26 @@ public class UserService {
 
         }
 
-/*
-    public User deleteById(int id) {
-        deleteById(id).setActive(false);
-        return user;
-    }
-
- */
-
-
-
-        // public User deleteById(int id) { }
     }
 
     public User findById(int id) {
         return userMapper.findById(id);
+    }
+
+    public ArrayList<Task> findTasksByUserId(int user_id, String complete) {
+        if (complete.equalsIgnoreCase("true")) {
+            ArrayList<Task> obj = taskMapper.getAllCompleteTasksByUserID(user_id);
+            return obj;
+        } else if (complete.equalsIgnoreCase("false")){
+            return taskMapper.getAllIncompleteTasksByUserID(user_id);
+        } else {
+            return taskMapper.findTasksByUserId(user_id);
+        }
+
+
+    }
+    public Task selectTasksById(int user_id) {
+            return userMapper.selectTasksById(user_id);
+
     }
 }
