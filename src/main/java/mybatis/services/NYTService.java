@@ -1,5 +1,7 @@
 package mybatis.services;
 
+import mybatis.models.nyt.Doc;
+import mybatis.models.nyt.NYTAnalyzePOJO;
 import mybatis.models.nyt.NYTBasePojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,41 @@ public class NYTService {
         NYTBasePojo obj = restTemplate.getForObject(request, NYTBasePojo.class);
         return obj;
     }
+
+
+    public int numArticlesContain(String keyword, Doc[] docs) {
+
+        int i = 0;
+
+        for (Doc d : docs) {
+            if (d.getSnippet().contains(keyword)) {
+                i++;
+            }
+            if (d.getLead_paragraph().contains(keyword)) {
+                i++;
+            }
+        }
+
+        return i;
+
+    }
+
+    public NYTAnalyzePOJO analyzeNYT(String keyword, String searchTerm) {
+
+        String request = nytBaseUrl + "?q=" + searchTerm + "&api-key=" + nytApiKey;
+        NYTBasePojo obj = restTemplate.getForObject(request, NYTBasePojo.class);
+
+        int count = numArticlesContain(keyword, obj.getResponse().getDocs());
+
+        NYTAnalyzePOJO analysis = new NYTAnalyzePOJO();
+        analysis.setKeyword(keyword);
+        analysis.setSearchTerm(searchTerm);
+        analysis.setNumOccurrences(count);
+
+        return analysis;
+    }
+
+
 }
 
 

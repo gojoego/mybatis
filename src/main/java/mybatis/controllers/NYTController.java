@@ -1,13 +1,13 @@
 package mybatis.controllers;
 
-import mybatis.models.nyt.Keyword;
 import mybatis.models.nyt.NYTAnalyzePOJO;
 import mybatis.models.nyt.NYTBasePojo;
 import mybatis.services.NYTService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.security.Key;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/nyt")
@@ -18,7 +18,7 @@ public class NYTController {
     NYTService nytService;
 
     @GetMapping("/search")
-    public NYTBasePojo returnApi (@RequestParam("q") String searchTerm){
+    public NYTBasePojo returnApi(@RequestParam("q") String searchTerm) {
         NYTBasePojo retVal = new NYTBasePojo();
         retVal = nytService.searchNYT("warren");
         return retVal;
@@ -27,11 +27,14 @@ public class NYTController {
 
     @GetMapping("/analyze")
     public NYTAnalyzePOJO analyze(
-            @RequestParam("/term") String searchTerm,
-            @RequestParam("/keyword") String keyword
+            @RequestParam("term") String searchTerm,
+            @RequestParam("keyword") String keyword
 
-            ){
+    ) {
         NYTAnalyzePOJO analysis = new NYTAnalyzePOJO();
-        analysis = nytService.searchNYT()
+        analysis = nytService.analyzeNYT(searchTerm,keyword);
+
+        return analysis;
+
     }
 }

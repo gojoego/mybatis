@@ -5,6 +5,17 @@ public class NYTAnalyzePOJO {
     String searchTerm;
     String keyword;
     int numOccurrences;
+    int numArticlesScanned;
+
+    public NYTAnalyzePOJO() {
+    }
+
+    public NYTAnalyzePOJO(String searchTerm, String keyword, int numOccurrences, int numArticlesScanned) {
+        this.searchTerm = searchTerm;
+        this.keyword = keyword;
+        this.numOccurrences = numOccurrences;
+        this.numArticlesScanned = numArticlesScanned;
+    }
 
     public String getSearchTerm() {
         return searchTerm;
@@ -28,5 +39,13 @@ public class NYTAnalyzePOJO {
 
     public void setNumOccurrences(int numOccurrences) {
         this.numOccurrences = numOccurrences;
+    }
+
+    public int getNumArticlesScanned() {
+        return numArticlesScanned;
+    }
+
+    public void setNumArticlesScanned(int numArticlesScanned) {
+        this.numArticlesScanned = numArticlesScanned;
     }
 }
