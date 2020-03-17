@@ -1,5 +1,9 @@
 package mybatis.controllers;
 
+// API calling API
+// API chaining
+
+import mybatis.models.ResponseObject;
 import mybatis.models.nyt.NYTAnalyzePOJO;
 import mybatis.models.nyt.NYTBasePojo;
 import mybatis.services.NYTService;
@@ -18,9 +22,9 @@ public class NYTController {
     NYTService nytService;
 
     @GetMapping("/search")
-    public NYTBasePojo returnApi(@RequestParam("q") String searchTerm) {
-        NYTBasePojo retVal = new NYTBasePojo();
-        retVal = nytService.searchNYT("warren");
+    public ResponseObject<NYTBasePojo> returnApi(@RequestParam("q") String searchTerm) {
+        ResponseObject<NYTBasePojo> retVal = new ResponseObject<>();
+        NYTBasePojo data = nytService.searchNYT(searchTerm);
         return retVal;
 
     }

@@ -17,6 +17,9 @@ public class Application {
     }
 }
 
+//@Bean annotation tells spring to manage this object
+
+
 
 
 
