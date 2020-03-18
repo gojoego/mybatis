@@ -7,14 +7,14 @@ public class NYTAnalyzePOJO {
     int numOccurrences;
     int numArticlesScanned;
 
-    public NYTAnalyzePOJO() {
-    }
-
     public NYTAnalyzePOJO(String searchTerm, String keyword, int numOccurrences, int numArticlesScanned) {
         this.searchTerm = searchTerm;
         this.keyword = keyword;
         this.numOccurrences = numOccurrences;
         this.numArticlesScanned = numArticlesScanned;
+    }
+
+    public NYTAnalyzePOJO() {
     }
 
     public String getSearchTerm() {

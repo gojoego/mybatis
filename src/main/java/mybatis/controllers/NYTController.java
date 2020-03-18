@@ -25,18 +25,26 @@ public class NYTController {
     public ResponseObject<NYTBasePojo> returnApi(@RequestParam("q") String searchTerm) {
         ResponseObject<NYTBasePojo> retVal = new ResponseObject<>();
         NYTBasePojo data = nytService.searchNYT(searchTerm);
+
+        retVal.setData(data);
+
         return retVal;
 
     }
 
     @GetMapping("/analyze")
-    public NYTAnalyzePOJO analyze(
+    public ResponseObject<NYTAnalyzePOJO> analyze(
             @RequestParam("term") String searchTerm,
             @RequestParam("keyword") String keyword
 
     ) {
-        NYTAnalyzePOJO analysis = new NYTAnalyzePOJO();
-        analysis = nytService.analyzeNYT(searchTerm,keyword);
+        ResponseObject<NYTAnalyzePOJO> analysis = new ResponseObject<>();
+
+        NYTAnalyzePOJO data = nytService.analyzeNYT(searchTerm,keyword);
+
+        analysis.setData(data);
+        analysis.setMessage("counting");
+        analysis.setResponse_code(200);
 
         return analysis;
 

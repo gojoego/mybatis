@@ -39,12 +39,16 @@ public class NYTService {
 
     }
 
+    public int numArticlesScanned(int num, Doc[] docs){
+        return num;
+    }
+
     public NYTAnalyzePOJO analyzeNYT(String keyword, String searchTerm) {
 
         String request = nytBaseUrl + "?q=" + searchTerm + "&api-key=" + nytApiKey;
         NYTBasePojo obj = restTemplate.getForObject(request, NYTBasePojo.class);
 
-        int count = numArticlesContain(keyword, obj.getResponse().getDocs());
+        int count = numArticlesContain(searchTerm, obj.getResponse().getDocs());
 
         NYTAnalyzePOJO analysis = new NYTAnalyzePOJO();
         analysis.setKeyword(keyword);
@@ -53,6 +57,8 @@ public class NYTService {
 
         return analysis;
     }
+
+
 
 
 }
