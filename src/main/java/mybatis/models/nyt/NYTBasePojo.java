@@ -40,6 +40,7 @@ public class NYTBasePojo {
         this.response = response;
     }
 
+
     @Override
     public String toString() {
         return "NYTBasePojo{" +

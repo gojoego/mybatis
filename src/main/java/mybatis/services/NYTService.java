@@ -39,10 +39,14 @@ public class NYTService {
 
     }
 
+/*
     public int numArticlesScanned(int num, Doc[] docs){
-        return num;
-    }
+        // need to return how many articles were scanned
+        for (num = 0; num > ; num++ )
 
+        }
+    }
+*/
     public NYTAnalyzePOJO analyzeNYT(String keyword, String searchTerm) {
 
         String request = nytBaseUrl + "?q=" + searchTerm + "&api-key=" + nytApiKey;
