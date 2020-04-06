@@ -50,3 +50,5 @@ public class NYTController {
 
     }
 }
+
+// no mapper for this case because NYT hosted online
