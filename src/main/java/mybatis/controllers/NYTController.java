@@ -46,6 +46,7 @@ public class NYTController {
         analysis.setMessage("counting");
         analysis.setResponse_code(200);
 
+
         return analysis;
 
     }
